@@ -23,7 +23,6 @@ def experience():
 
 
 def balance_teams():
-    players_per_team = len(constants.PLAYERS) / len(constants.TEAMS)
     team_bandits = []
     team_warriors = []
     team_panthers = []
@@ -31,7 +30,7 @@ def balance_teams():
     num_players = len(teams)
     for num in range(len(players_list)):
         teams[num % num_players].append(players_list[num])
-        return team_bandits, team_panthers, team_warriors
+    return teams
 
 
 def team_stat_menu():
