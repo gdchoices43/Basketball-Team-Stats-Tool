@@ -36,7 +36,6 @@ def balance_teams():
 
 def team_stat_menu():
     while True:
-        # Creating the layout of the menu
         print("\n")
         print("BASKETBALL TEAM STATS TOOL")
         print("\n")
