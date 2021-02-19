@@ -30,7 +30,8 @@ def clean_guardian():
 
 
 def balance_teams():
-    pass
+    players_per_team = len(PLAYERS) / len(TEAMS)
+
 
 
 def team_stat_menu():
@@ -46,26 +47,24 @@ def team_stat_menu():
 
     Enter-> B) To Quit
         """)
-        option = input("Enter an option: ")
+        option = input("Enter an OPTION: ")
 
         while True:
             try:
-                if option == "B":
-                    print("Quitting the Basketball Team Stats Tool.")
-                    break
-                elif option == "A":
-                    print("""
-                    \nEnter-> A) Bandits\nEnter-> B) Warriors\nEnter-> C) panthers
-                    """)
-                    team_option = input("Enter an option: ")
+                if option == "A":
+                    print("\nEnter-> A) Bandits\nEnter-> B) Warriors\nEnter-> C) Panthers")
+                    team_option = input("\nEnter an OPTION: ")
                     if team_option == "A":
                         pass
                     elif team_option == "B":
                         pass
                     elif team_option == "C":
                         pass
+                elif option == "B":
+                    print("Exiting Basketball Team Stats Tool.")
+                    break
             except ValueError:
-                print("That was not a valid OPTION. Please try again")
+                print("That's not a valid OPTION. Please try again.")
                 return team_stat_menu()
 
 
