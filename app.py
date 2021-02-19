@@ -35,71 +35,71 @@ def balance_teams():
 
 
 def team_stat_menu():
-    while True:
-        print("\n")
-        print("BASKETBALL TEAM STATS TOOL")
-        print("\n")
-        print("*********  MENU  *********")
-        print("\n")
-        print("YOUR OPTIONS ARE:  ")
-        print("""
-    Enter-> A) Team Stats
+    print("\n")
+    print("BASKETBALL TEAM STATS TOOL")
+    print("\n")
+    print("*********  MENU  *********")
+    print("\n")
+    print("YOUR OPTIONS ARE:  ")
+    print("""
+Enter-> A) Team Stats
 
-    Enter-> B) To Exit
-        """)
-        option = input("Enter an OPTION: ")
-        while True:
-            try:
-                if option.upper() == "A":
-                    print("\nEnter-> A) Team Bandits Stats")
-                    print("\n")
-                    print("Enter-> B) Team Warriors Stats")
-                    print("\n")
-                    print("Enter-> C) Team Panthers Stats")
-                    break
-                elif option.upper() == "B":
-                    print("\nExiting Basketball Team Stats Tool.")
-                    sys.exit()
-            except ValueError:
-                print("That's not a valid option. Please try again.")
-                continue
-        team_option = input("\nEnter an OPTION: ")
-        while True:
-            try:
-                if team_option.upper() == "A":
-                    team_bandits = balance_teams()[0]
-                    num_players = len(team_bandits)
-                    print("\nTeam: Panthers\n=+=+=+=+=+=+=+=+=+=+=+=+=+"
-                    "\nPlayers: {}\n".format(num_players))
-                    team_list1 = []
-                    for player in team_bandits:
-                        players_name = player["name"]
-                        team_list1.append(str(players_name))
-                        print(", ".join(team_list1))
-                elif team_option.upper() == "B":
-                    team_warriors = balance_teams()[0]
-                    num_players = len(team_warriors)
-                    print("\nTeam: Panthers\n=+=+=+=+=+=+=+=+=+=+=+=+=+"
-                    "\nPlayers: {}\n".format(num_players))
-                    team_list2 = []
-                    for player in team_warriors:
-                        players_name = player["name"]
-                        team_list2.append(str(players_name))
-                        print(", ".join(team_list2))
-                elif team_option.upper() == "C":
-                    team_panther = balance_teams()[0]
-                    num_players = len(team_panther)
-                    print("\nTeam: Panthers\n=+=+=+=+=+=+=+=+=+=+=+=+=+"
-                    "\nPlayers: {}\n".format(num_players))
-                    team_list3 = []
-                    for player in team_panther:
-                        players_name = player["name"]
-                        team_list3.append(str(players_name))
-                        print(", ".join(team_list3))
-                        break
-            except ValueError:
-                print("That's not a valid option. Please try again.")
-                continue
+Enter-> B) To Exit
+    """)
+    option = input("Enter an OPTION: ")
+    while True:
+        try:
+            if option.upper() == "A":
+                print("\nEnter-> A) Team Bandits Stats")
+                print("\n")
+                print("Enter-> B) Team Warriors Stats")
+                print("\n")
+                print("Enter-> C) Team Panthers Stats")
+                break
+            elif option.upper() == "B":
+                print("\nExiting Basketball Team Stats Tool.")
+                sys.exit()
+            raise ValueError()
+        except ValueError as e:
+            print("\nThat's not a valid option.Please try again.")
+            break
+    team_option = input("\nEnter an OPTION: ")
+    while True:
+        try:
+            if team_option.upper() == "A":
+                team_bandits = balance_teams()[0]
+                num_players = len(team_bandits)
+                print("\nTeam: Bandits\n=+=+=+=+=+=+=+=+=+=+=+=+=+\nPlayers: {}\n".format(num_players))
+                team_list1 = []
+                for player in team_bandits:
+                    players_name = player["name"]
+                    team_list1.append(str(players_name))
+                    print(", ".join(team_list1))
+                break
+            elif team_option.upper() == "B":
+                team_warriors = balance_teams()[0]
+                num_players = len(team_warriors)
+                print("\nTeam: Warriors\n=+=+=+=+=+=+=+=+=+=+=+=+=+\nPlayers: {}\n".format(num_players))
+                team_list2 = []
+                for player in team_warriors:
+                    players_name = player["name"]
+                    team_list2.append(str(players_name))
+                    print(", ".join(team_list2))
+                break
+            elif team_option.upper() == "C":
+                team_panthers = balance_teams()[0]
+                num_players = len(team_panthers)
+                print("\nTeam: Panthers\n=+=+=+=+=+=+=+=+=+=+=+=+=+\nPlayers: {}\n".format(num_players))
+                team_list3 = []
+                for player in team_panthers:
+                    players_name = player["name"]
+                    team_list3.append(str(players_name))
+                    print(", ".join(team_list3))
+                break
+            raise ValueError()
+        except ValueError as e:
+            print("\nThat's not a valid option. Please try again.")
+            break
 
 
 if __name__ == "__main__":
