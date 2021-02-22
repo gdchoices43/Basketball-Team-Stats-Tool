@@ -4,33 +4,54 @@ import copy
 
 teams_list = copy.deepcopy(constants.TEAMS)
 players_list = copy.deepcopy(constants.PLAYERS)
-no_experience = []
-has_experience = []
+not_experienced = []
+is_experienced = []
+all_teams = int(len(teams_list))
 
 
 def clean_data():
-    for player in players_list:
-        if player["experience"] == "NO":
-            player["experience"] = False
-            no_experience.append(player)
-        elif player["experience"] == "YES":
-            player["experience"] = True
-            has_experience.append(player)
+    pass
 
 
 def balance_teams():
     panthers = []
     bandits = []
     warriors = []
-    all_teams = [panthers, bandits, warriors]
-    num_teams = len(all_teams)
+    teams = [panthers, bandits, warriors]
+    num_teams = len(teams)
     for num in range(len(players_list)):
-        all_teams[num % num_teams].append(players_list[num])
-    return panthers, bandits, warriors
+        teams[num % num_teams].append(players_list[num])
+        for player in players_list:
+            if player["experience"] == "NO":
+                player["experience"] = False
+                not_experienced.append(player)
+            elif player["experience"] == "YES":
+                player["experience"] = True
+                is_experienced.append(player)
+                num_of_exp = len(is_experienced)
+                num_of_no_exp = len(not_experienced)
+                exp_per_team = int(num_of_exp / num_teams)
+                no_exp_per_team = int(num_of_no_exp / num_teams)
+                for players in is_experienced:
+                    player_with_exp = players["name"]
+                    if len(panthers) < exp_per_team:
+                        panthers.append(player_with_exp)
+                    elif len(bandits) < exp_per_team:
+                        bandits.append(player_with_exp)
+                    elif len(warriors) < exp_per_team:
+                        warriors.append(player_with_exp)
+                for players in not_experienced:
+                    player_with_no_exp = players["name"]
+                    if len(panthers) < no_exp_per_team:
+                        panthers.append(player_with_no_exp)
+                    elif len(bandits) < no_exp_per_team:
+                        bandits.append(player_with_no_exp)
+                    elif len(warriors) < no_exp_per_team:
+                        warriors.append(player_with_no_exp)
+    return panthers, bandits, warriors, teams
 
 
 def team_stat_menu():
-    print("\n")
     print("BASKETBALL TEAM STATS TOOL")
     print("\n")
     print("*********  MENU  *********")
@@ -57,7 +78,7 @@ Enter-> B) To Exit
             raise ValueError()
         except ValueError as e:
             print("\nThat's not a valid option.Please try again.")
-            break
+            return team_stat_menu()
     team_option = input("\nEnter an OPTION: ")
     while True:
         try:
@@ -65,12 +86,14 @@ Enter-> B) To Exit
                 panthers = balance_teams()[0]
                 num_players = len(panthers)
                 print("\nTeam: Panthers\n=+=+=+=+=+=+=+=+=+=+=+=+=+\nPlayers: {}\n".format(num_players))
-                team_list_a = []
+                print(f"Experienced Players: {int(len(is_experienced) / all_teams)}")
+                print(f"\nInexperienced Players: {int(len(not_experienced) / all_teams)}\n")
+                team_a = []
                 for player in panthers:
-                    players_name = player["name"]
-                    team_list_a.append(str(players_name))
+                    name = player["name"]
+                    team_a.append(str(name))
                     print(player["name"], end="\n")
-                more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
+                more_stats = input("\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
                 if more_stats.upper() == "Y":
                     print("\nOK, rerouting to the main menu.")
@@ -85,10 +108,12 @@ Enter-> B) To Exit
                 bandits = balance_teams()[1]
                 num_players = len(bandits)
                 print("\nTeam: Bandits\n=+=+=+=+=+=+=+=+=+=+=+=+=+\nPlayers: {}\n".format(num_players))
-                team_list_b = []
+                print(f"Experienced Players: {int(len(is_experienced) / all_teams)}")
+                print(f"\nInexperienced Players: {int(len(not_experienced) / all_teams)}\n")
+                team_b = []
                 for player in bandits:
-                    players_name = player["name"]
-                    team_list_b.append(str(players_name))
+                    name = player["name"]
+                    team_b.append(str(name))
                     print(player["name"], end="\n")
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
@@ -105,10 +130,12 @@ Enter-> B) To Exit
                 warriors = balance_teams()[2]
                 num_players = len(warriors)
                 print("\nTeam: Warriors\n=+=+=+=+=+=+=+=+=+=+=+=+=+\nPlayers: {}\n".format(num_players))
-                team_list_c = []
+                print(f"Experienced Players: {int(len(is_experienced) / all_teams)}")
+                print(f"\nInexperienced Players: {int(len(not_experienced) / all_teams)}\n")
+                team_c = []
                 for player in warriors:
-                    player_name = player["name"]
-                    team_list_c.append(str(player_name))
+                    name = player["name"]
+                    team_c.append(str(name))
                     print(player["name"], end="\n")
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
@@ -124,7 +151,7 @@ Enter-> B) To Exit
             raise ValueError()
         except ValueError as e:
             print("\nThat's not a valid option. Please try again.")
-            break
+            return team_stat_menu()
 
 
 if __name__ == "__main__":
