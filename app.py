@@ -9,8 +9,15 @@ is_experienced = []
 all_teams = int(len(teams_list))
 
 
-def clean_data():
-    pass
+def player_height():
+    for player in players_list:
+        height = player["height"][0:2]
+        player["height"] = int(height)
+
+
+def player_guardian():
+    for player in players_list:
+        player["guardians"] = player["guardians"]
 
 
 def balance_teams():
@@ -66,11 +73,11 @@ Enter-> B) To Exit
     while True:
         try:
             if option.upper() == "A":
-                print("\nEnter-> A) Team Bandits Stats")
+                print("\nEnter-> A) Team Panthers Stats")
                 print("\n")
-                print("Enter-> B) Team Warriors Stats")
+                print("Enter-> B) Team Bandits Stats")
                 print("\n")
-                print("Enter-> C) Team Panthers Stats")
+                print("Enter-> C) Team Warriors Stats")
                 break
             elif option.upper() == "B":
                 print("\nExiting Basketball Team Stats Tool.")
@@ -92,7 +99,15 @@ Enter-> B) To Exit
                 for player in panthers:
                     name = player["name"]
                     team_a.append(str(name))
-                    print(player["name"], end="\n")
+                print("Players on Roster:")
+                print(", ".join(team_a))
+                print("\n")
+                team_a_guardians = []
+                for player in panthers:
+                    guardians = player["guardians"]
+                    team_a_guardians.append(str(guardians))
+                print("Players Guardians:")
+                print(", ".join(team_a_guardians))
                 more_stats = input("\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
                 if more_stats.upper() == "Y":
@@ -114,7 +129,15 @@ Enter-> B) To Exit
                 for player in bandits:
                     name = player["name"]
                     team_b.append(str(name))
-                    print(player["name"], end="\n")
+                print("Players on Roster:")
+                print(", ".join(team_b))
+                print("\n")
+                team_b_guardians = []
+                for player in bandits:
+                    guardians = player["guardians"]
+                    team_b_guardians.append(str(guardians))
+                print("Players Guardians:")
+                print(", ".join(team_b_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
                 if more_stats.upper() == "Y":
@@ -136,7 +159,15 @@ Enter-> B) To Exit
                 for player in warriors:
                     name = player["name"]
                     team_c.append(str(name))
-                    print(player["name"], end="\n")
+                print("Players on Roster:")
+                print(", ".join(team_c))
+                print("\n")
+                team_c_guardians = []
+                for player in warriors:
+                    guardians = player["guardians"]
+                    team_c_guardians.append(str(guardians))
+                print("Players Guardians:")
+                print(", ".join(team_c_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
                 if more_stats.upper() == "Y":
@@ -155,6 +186,7 @@ Enter-> B) To Exit
 
 
 if __name__ == "__main__":
-    clean_data()
+    player_height()
+    player_guardian()
     balance_teams()
     team_stat_menu()
