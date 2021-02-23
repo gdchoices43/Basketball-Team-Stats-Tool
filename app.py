@@ -153,7 +153,6 @@ Enter-> B) To Exit
                     team_b_guardians.append(str(guardians))
                 print("Players Guardians:")
                 # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
-                    pass this solution
                 print(", ".join(team_b_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
