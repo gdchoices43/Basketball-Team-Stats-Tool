@@ -14,7 +14,8 @@ def clean_data():
         height = player["height"].split()
         player["height"] = int(height[0])
     for player in players_list:
-        # Mel R {they/them} gave me a couple suggestions on how how to take the "and" out of the guardians list
+        # Mel R {they/them} TeamTreeHouse Slack gave me a couple suggestions
+        # on how how to take the "and" out of the guardians list
         player["guardians"] = player["guardians"].replace(" and ", ", ")
 
 
@@ -24,7 +25,7 @@ def balance_teams():
     warriors = []
     teams = [panthers, bandits, warriors]
     num_teams = len(teams)
-    # Jennifer Nordell gave helped me with figuring this out
+    # Jennifer Nordell helped me with figuring this out
     for num in range(len(players_list)):
         teams[num % num_teams].append(players_list[num])
         for player in players_list:
@@ -94,7 +95,7 @@ Enter-> B) To Exit
                 panthers = balance_teams()[0]
                 num_players = len(panthers)
                 height = [player["height"] for player in panthers]
-                # got ths solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
+                # Got this solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
                 average_height = round(sum(height) / len(panthers), 1)
                 print(
                     f"\nTeam: Panthers Stats\n=+=+=+=+=+=+=+=+=+=+=+=\nPlayers: {int(num_players)} "
@@ -106,7 +107,7 @@ Enter-> B) To Exit
                     name = player["name"]
                     team_a.append(str(name))
                 print("Players on Roster:")
-                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
                 print(", ".join(team_a))
                 print("\n")
                 team_a_guardians = []
@@ -114,7 +115,7 @@ Enter-> B) To Exit
                     guardians = player["guardians"]
                     team_a_guardians.append(str(guardians))
                 print("Players Guardians:")
-                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
                 print(", ".join(team_a_guardians))
                 more_stats = input("\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
@@ -131,7 +132,7 @@ Enter-> B) To Exit
                 bandits = balance_teams()[1]
                 num_players = len(bandits)
                 height = [player["height"] for player in bandits]
-                # got ths solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
+                # got this solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
                 average_height = round(sum(height) / len(bandits), 1)
                 print(
                     f"\nTeam: Bandits Stats\n=+=+=+=+=+=+=+=+=+=+=+=\nPlayers: {int(num_players)} "
@@ -143,7 +144,7 @@ Enter-> B) To Exit
                     name = player["name"]
                     team_b.append(str(name))
                 print("Players on Roster:")
-                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
                 print(", ".join(team_b))
                 print("\n")
                 team_b_guardians = []
@@ -151,7 +152,8 @@ Enter-> B) To Exit
                     guardians = player["guardians"]
                     team_b_guardians.append(str(guardians))
                 print("Players Guardians:")
-                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
+                    pass this solution
                 print(", ".join(team_b_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
@@ -168,7 +170,7 @@ Enter-> B) To Exit
                 warriors = balance_teams()[2]
                 num_players = len(warriors)
                 height = [player["height"] for player in warriors]
-                # got ths solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
+                # got this solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
                 average_height = round(sum(height) / len(warriors), 1)
                 print(
                     f"\nTeam: Warriors Stats\n=+=+=+=+=+=+=+=+=+=+=+=\nPlayers: {int(num_players)} "
@@ -180,7 +182,7 @@ Enter-> B) To Exit
                     name = player["name"]
                     team_c.append(str(name))
                 print("Players on Roster:")
-                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
                 print(", ".join(team_c))
                 print("\n")
                 team_c_guardians = []
@@ -188,7 +190,7 @@ Enter-> B) To Exit
                     guardians = player["guardians"]
                     team_c_guardians.append(str(guardians))
                 print("Players Guardians:")
-                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack helped me with this solution
                 print(", ".join(team_c_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
