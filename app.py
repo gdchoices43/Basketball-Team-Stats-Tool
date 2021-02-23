@@ -14,7 +14,8 @@ def clean_data():
         height = player["height"].split()
         player["height"] = int(height[0])
     for player in players_list:
-        player["guardians"] = player["guardians"]
+        # Mel R {they/them} gave me a couple suggestions on how how to take the "and" out of the guardians list
+        player["guardians"] = player["guardians"].replace(" and ", ", ")
 
 
 def balance_teams():
@@ -105,7 +106,7 @@ Enter-> B) To Exit
                     name = player["name"]
                     team_a.append(str(name))
                 print("Players on Roster:")
-                # Mel R TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
                 print(", ".join(team_a))
                 print("\n")
                 team_a_guardians = []
@@ -113,7 +114,7 @@ Enter-> B) To Exit
                     guardians = player["guardians"]
                     team_a_guardians.append(str(guardians))
                 print("Players Guardians:")
-                # Mel R TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
                 print(", ".join(team_a_guardians))
                 more_stats = input("\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
@@ -142,7 +143,7 @@ Enter-> B) To Exit
                     name = player["name"]
                     team_b.append(str(name))
                 print("Players on Roster:")
-                # Mel R TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
                 print(", ".join(team_b))
                 print("\n")
                 team_b_guardians = []
@@ -150,7 +151,7 @@ Enter-> B) To Exit
                     guardians = player["guardians"]
                     team_b_guardians.append(str(guardians))
                 print("Players Guardians:")
-                # Mel R TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
                 print(", ".join(team_b_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
@@ -179,7 +180,7 @@ Enter-> B) To Exit
                     name = player["name"]
                     team_c.append(str(name))
                 print("Players on Roster:")
-                # Mel R TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
                 print(", ".join(team_c))
                 print("\n")
                 team_c_guardians = []
@@ -187,7 +188,7 @@ Enter-> B) To Exit
                     guardians = player["guardians"]
                     team_c_guardians.append(str(guardians))
                 print("Players Guardians:")
-                # Mel R TeamTreeHouse Slack gave me this solution
+                # Mel R {they/them} TeamTreeHouse Slack gave me this solution
                 print(", ".join(team_c_guardians))
                 more_stats = input("\n\nWould you like to see other teams? ENTER: Y or N ")
                 more_stats = str(more_stats)
