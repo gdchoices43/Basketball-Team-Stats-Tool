@@ -6,56 +6,32 @@ teams_list = copy.deepcopy(constants.TEAMS)
 players_list = copy.deepcopy(constants.PLAYERS)
 not_experienced = []
 is_experienced = []
-all_teams = int(len(teams_list))
 
 
 def clean_data():
     for player in players_list:
+        if player["experience"] == "YES":
+            player["experience"] = True
+            is_experienced.append(player)
+        elif player["experience"] == "NO":
+            player["experience"] = False
+            not_experienced.append(player)
         height = player["height"].split()
         player["height"] = int(height[0])
-    for player in players_list:
         # Mel R {they/them} TeamTreeHouse Slack gave me a couple suggestions
         # on how how to take the "and" out of the guardians list
         player["guardians"] = player["guardians"].replace(" and ", ", ")
 
 
 def balance_teams():
-    panthers = []
-    bandits = []
-    warriors = []
-    teams = [panthers, bandits, warriors]
-    num_teams = len(teams)
-    # Jennifer Nordell helped me with figuring this out
-    for num in range(len(players_list)):
-        teams[num % num_teams].append(players_list[num])
-        for player in players_list:
-            if player["experience"] == "NO":
-                player["experience"] = False
-                not_experienced.append(player)
-            elif player["experience"] == "YES":
-                player["experience"] = True
-                is_experienced.append(player)
-                num_of_exp = len(is_experienced)
-                num_of_no_exp = len(not_experienced)
-                exp_per_team = int(num_of_exp / num_teams)
-                no_exp_per_team = int(num_of_no_exp / num_teams)
-                for players in is_experienced:
-                    player_with_exp = players["name"]
-                    if len(panthers) < exp_per_team:
-                        panthers.append(player_with_exp)
-                    elif len(bandits) < exp_per_team:
-                        bandits.append(player_with_exp)
-                    elif len(warriors) < exp_per_team:
-                        warriors.append(player_with_exp)
-                for players in not_experienced:
-                    player_with_no_exp = players["name"]
-                    if len(panthers) < no_exp_per_team:
-                        panthers.append(player_with_no_exp)
-                    elif len(bandits) < no_exp_per_team:
-                        bandits.append(player_with_no_exp)
-                    elif len(warriors) < no_exp_per_team:
-                        warriors.append(player_with_no_exp)
-    return panthers, bandits, warriors, teams
+    # I had previoulsy made this function so much more difficult than what I was trying to accomplish
+    # Mel R {they/them} suggested I look at my function and make sure it is doing everythig I'm intending it
+    # to do. That's when I realized the soution was much simpler. All I needed to do was use indexing to call
+    # a team and then use indexing again to put the first 3 exp players and the first 3 non_exp players on
+    # that team.
+    teams_list[0] = is_experienced[:3] + not_experienced[:3]
+    teams_list[1] = is_experienced[3:6] + not_experienced[3:6]
+    teams_list[2] = is_experienced[6:9] + not_experienced[6:9]
 
 
 def team_stat_menu():
@@ -92,15 +68,19 @@ Enter-> B) To Exit
     while True:
         try:
             if team_option.upper() == "A":
-                panthers = balance_teams()[0]
+                panthers = teams_list[0]
                 num_players = len(panthers)
+                # I rewatched the "Python Comprehensions Workshop" and realized This was the way to get the
+                # proper output for showing exp/non_exp players per team
+                exp_player = [player["experience"] for player in panthers if player["experience"] == True]
+                non_exp_player = [player["experience"] for player in panthers if player["experience"] == False]
                 height = [player["height"] for player in panthers]
                 # Got this solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
                 average_height = round(sum(height) / len(panthers), 1)
                 print(
                     f"\nTeam: Panthers Stats\n=+=+=+=+=+=+=+=+=+=+=+=\nPlayers: {int(num_players)} "
-                    f"Experienced Players: {int(len(is_experienced) / all_teams)} "
-                    f"Inexperienced Players: {int(len(not_experienced) / all_teams)} "
+                    f"Experienced Players: {int(len(exp_player))} "
+                    f"Inexperienced Players: {int(len(non_exp_player))} "
                     f"Average Height on Team: {float(average_height)}\n")
                 team_a = []
                 for player in panthers:
@@ -129,15 +109,19 @@ Enter-> B) To Exit
                     print("\nThat's not an OPTION. Rerouting to main menu.")
                     return team_stat_menu()
             elif team_option.upper() == "B":
-                bandits = balance_teams()[1]
+                bandits = teams_list[1]
                 num_players = len(bandits)
+                # I rewatched the "Python Comprehensions Workshop" and realized This was the way to get the
+                # proper output for showing exp/non_exp players per team
+                exp_player = [player["experience"] for player in bandits if player["experience"] == True]
+                non_exp_player = [player["experience"] for player in bandits if player["experience"] == False]
                 height = [player["height"] for player in bandits]
                 # got this solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
                 average_height = round(sum(height) / len(bandits), 1)
                 print(
                     f"\nTeam: Bandits Stats\n=+=+=+=+=+=+=+=+=+=+=+=\nPlayers: {int(num_players)} "
-                    f"Experienced Players: {int(len(is_experienced) / all_teams)} "
-                    f"Inexperienced Players: {int(len(not_experienced) / all_teams)} "
+                    f"Experienced Players: {int(len(exp_player))} "
+                    f"Inexperienced Players: {int(len(non_exp_player))} "
                     f"Average Height on Team: {float(average_height)}\n")
                 team_b = []
                 for player in bandits:
@@ -166,15 +150,19 @@ Enter-> B) To Exit
                     print("\nThat's not an OPTION. Rerouting to main menu.")
                     return team_stat_menu()
             elif team_option.upper() == "C":
-                warriors = balance_teams()[2]
+                warriors = teams_list[2]
                 num_players = len(warriors)
+                # I rewatched the "Python Comprehensions Workshop" and realized This was the way to get the
+                # proper output for showing exp/non_exp players per team
+                exp_player = [player["experience"] for player in warriors if player["experience"] == True]
+                non_exp_player = [player["experience"] for player in warriors if player["experience"] == False]
                 height = [player["height"] for player in warriors]
                 # got this solution from GeekForGeeks https://geeksforgeeks/find-average-list-python
                 average_height = round(sum(height) / len(warriors), 1)
                 print(
                     f"\nTeam: Warriors Stats\n=+=+=+=+=+=+=+=+=+=+=+=\nPlayers: {int(num_players)} "
-                    f"Experienced Players: {int(len(is_experienced) / all_teams)} "
-                    f"Inexperienced Players: {int(len(not_experienced) / all_teams)} "
+                    f"Experienced Players: {int(len(exp_player))} "
+                    f"Inexperienced Players: {int(len(non_exp_player))} "
                     f"Average Height on Team: {float(average_height)}\n")
                 team_c = []
                 for player in warriors:
